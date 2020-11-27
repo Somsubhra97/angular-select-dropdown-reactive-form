@@ -51,8 +51,8 @@
 			<div class="list-group-item clearfix" *ngFor="let El of array;let i=index;">
 				<h5 class="list-group-item-heading">{{ El.name }}->{{El.city}}</h5>
 
-				<button (click)="edit(i)">Edit Me</button>
-				<button (click)="delete(i)"> Delete</button>
+				<button class="btn btn-primary mr-1" type="button" (click)="edit(i)">Edit Me</button>
+				<button class="btn btn-warning" type="button" (click)="delete(i)"> Delete</button>
 			</div>
 
 			<div>
