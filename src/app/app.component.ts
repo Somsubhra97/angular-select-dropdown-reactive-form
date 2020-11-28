@@ -11,7 +11,6 @@ import { Subscription } from "rxjs";
 export class AppComponent implements OnInit {
   private postsSub: Subscription;
   isSubmitted = false;
-  isEdit: boolean = true;
   array: Model[] = [];
   idx: number = -1;
   City: any = ["Florida", "South Dakota", "Tennessee", "Michigan"];
@@ -28,12 +27,11 @@ export class AppComponent implements OnInit {
       });
   }
   private init() {
-    if (this.isEdit) {
-      this.registrationForm = this.fb.group({
-        city: ["", [Validators.required]],
-        name: ["", [Validators.required]]
-      });
-    }
+    this.registrationForm = this.fb.group({
+      city: ["", [Validators.required]],
+      name: ["", [Validators.required]]
+    });
+
     console.log(this.registrationForm.get("name").invalid);
   }
   /*########### Form ###########*/
