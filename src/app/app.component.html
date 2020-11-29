@@ -15,14 +15,25 @@
 
 						<div class="mb-3">
 							<select class="custom-select" (change)="changeCity($event)" formControlName="city">
-              <option value="">Choose your city</option>
-              <option *ngFor="let city of City" [ngValue]="city">{{city}}</option>
-            </select>
+                <option value="">Choose your city</option>
+                <option *ngFor="let city of City" [ngValue]="city">{{city}}</option>
+             </select>
 
 							<!-- error block -->
 							<div class="invalid-feedback" *ngIf="isSubmitted && city.errors?.required">
 								<sup>*</sup>Please enter your city name
 							</div>
+
+							<select class="custom-select" (change)="changeRegion($event)" formControlName="region">
+                <option value="">Choose your Region</option>
+                <option *ngFor="let x of Regions" [ngValue]="x">{{x}}</option>
+             </select>
+
+							<!-- error block -->
+							<div class="invalid-feedback" *ngIf="isSubmitted && region.errors?.required">
+								<sup>*</sup>Please enter your region name
+							</div>
+
 							<div class="form-group">
 								<input
               type="text"
@@ -49,7 +60,7 @@
 	<div class="row">
 		<div class="col-xs-6 col-md-6">
 			<div class="list-group-item clearfix" *ngFor="let El of array;let i=index;">
-				<h5 class="list-group-item-heading">{{ El.name }}->{{El.city}}</h5>
+				<h5 class="list-group-item-heading">{{ El.name }}->{{El.city}}@{{El.region}}</h5>
 
 				<button class="btn btn-primary mr-1" type="button" (click)="edit(i)">Edit Me</button>
 				<button class="btn btn-warning" type="button" (click)="delete(i)"> Delete</button>

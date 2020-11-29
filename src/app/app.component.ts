@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   array: Model[] = [];
   idx: number = -1;
   City: any = ["Florida", "South Dakota", "Tennessee", "Michigan"];
-
+  Regions: String[] = [];
   constructor(public fb: FormBuilder, public postsService: AppService) {
     this.init();
   }
@@ -26,29 +26,33 @@ export class AppComponent implements OnInit {
         this.array = res;
       });
   }
+  registrationForm: any;
   private init() {
     this.registrationForm = this.fb.group({
       city: ["", [Validators.required]],
-      name: ["", [Validators.required]]
+      name: ["", [Validators.required]],
+      region: ["", [Validators.required]]
     });
-
-    console.log(this.registrationForm.get("name").invalid);
   }
-  /*########### Form ###########*/
-  registrationForm = this.fb.group({
-    city: ["", [Validators.required]],
-    name: ["", [Validators.required]]
-  });
 
   // Choose city using select dropdown
   changeCity(e) {
     this.city.setValue(e.target.value.split(" ")[1], {
       onlySelf: true
     });
+    this.Regions = ["Vice_Beach", "Downing_St."];
+  }
+  changeRegion(e) {
+    this.region.setValue(e.target.value.split(" ")[1], {
+      onlySelf: true
+    });
   }
   // Getter method to access formcontrols
   get city() {
     return this.registrationForm.get("city");
+  }
+  get region() {
+    return this.registrationForm.get("region");
   }
 
   /*########### Template Driven Form ###########*/
@@ -58,10 +62,8 @@ export class AppComponent implements OnInit {
       return false;
     } else {
       if (this.idx < 0) {
-        console.log(this.registrationForm.value);
         this.postsService.addPosts(this.registrationForm.value);
       } else {
-        console.log(this.idx);
         this.postsService.updatePost(this.idx, this.registrationForm.value);
       }
       this.registrationForm.reset();
@@ -73,6 +75,7 @@ export class AppComponent implements OnInit {
     const data: IModel = this.postsService.getPost(this.idx);
     this.registrationForm.get("city").setValue(data.city);
     this.registrationForm.get("name").setValue(data.name);
+    this.registrationForm.get("region").setValue(data.region);
   }
   delete(i: any) {
     this.postsService.deletePost(+i);
