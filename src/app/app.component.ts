@@ -43,6 +43,20 @@ export class AppComponent implements OnInit {
     );
   }
 
+  onDeleteRow(rowIndex) {
+    let rows = this.registrationForm.get("rows") as FormArray;
+    rows.removeAt(rowIndex);
+  }
+
+  addRow() {
+    let rows = this.registrationForm.get("rows") as FormArray;
+    rows.push(
+      this.fb.group({
+        name: [null, Validators.required],
+        status: [null, Validators.required]
+      })
+    );
+  }
   // Choose city using select dropdown
   changeCity(e) {
     this.city.setValue(e.target.value.split(" ")[1], {
