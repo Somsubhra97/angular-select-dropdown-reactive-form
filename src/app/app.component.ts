@@ -1,5 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators, FormArray } from "@angular/forms";
+import {
+  FormBuilder,
+  Validators,
+  FormArray,
+  FormGroup,
+  FormControl
+} from "@angular/forms";
 import { Model, IModel } from "./Model";
 import { AppService } from "./app.service";
 import { Subscription } from "rxjs";
@@ -19,7 +25,7 @@ export class AppComponent implements OnInit {
   constructor(public fb: FormBuilder, public postsService: AppService) {
     this.init();
   }
-
+  registrationForm: any;
   ngOnInit() {
     this.postsSub = this.postsService
       .getPostUpdateListener()
@@ -28,7 +34,7 @@ export class AppComponent implements OnInit {
       });
     this.init();
   }
-  registrationForm: any;
+
   private init() {
     this.registrationForm = this.fb.group({
       city: ["", [Validators.required]],
@@ -37,10 +43,10 @@ export class AppComponent implements OnInit {
       checked: new FormArray([])
     });
     this.registrationForm.get("checked").push(
-      this.fb.group({
-        status: [null]
+      new FormGroup({
+        status: new FormControl(null)
       })
-    );
+    );console.log(this.registrationForm.get('checked'))
   }
 
   onDeleteRow(rowIndex) {
@@ -52,8 +58,7 @@ export class AppComponent implements OnInit {
     let rows = this.registrationForm.get("rows") as FormArray;
     rows.push(
       this.fb.group({
-        name: [null, Validators.required],
-        status: [null, Validators.required]
+        status: [null]
       })
     );
   }

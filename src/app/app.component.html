@@ -45,12 +45,24 @@
 									name.
 								</p>
 							</div>
+
+							<div class="form-group" formArrayName="checked"
+								*ngFor="let row of registrationForm.get('checked').controls; let i = index"
+								[formGroupName]="i">
+								<input
+                  type="radio"
+                  class="custom-control-input"
+                  formControlName="status"
+                  value="Present"
+                />
+
+              </div>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<!-- Submit Button -->
-				<button type="submit" [disabled]="!registrationForm.valid" class="btn btn-danger btn-lg btn-block">{{this.idx!=-1? 'Edit':'Submit'}}</button>
+					<!-- Submit Button -->
+					<button type="submit" [disabled]="!registrationForm.valid" class="btn btn-danger btn-lg btn-block">{{this.idx!=-1? 'Edit':'Submit'}}</button>
 
 
 			</form><!-- Form ends -->
