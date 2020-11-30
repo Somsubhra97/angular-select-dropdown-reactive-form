@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators, FormArray } from "@angular/forms";
 import { Model, IModel } from "./Model";
 import { AppService } from "./app.service";
 import { Subscription } from "rxjs";
@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   idx: number = -1;
   City: any = ["Florida", "South Dakota", "Tennessee", "Michigan"];
   Regions: String[] = [];
+
   constructor(public fb: FormBuilder, public postsService: AppService) {
     this.init();
   }
@@ -25,14 +26,21 @@ export class AppComponent implements OnInit {
       .subscribe((res: Model[]) => {
         this.array = res;
       });
+    this.init();
   }
   registrationForm: any;
   private init() {
     this.registrationForm = this.fb.group({
       city: ["", [Validators.required]],
       name: ["", [Validators.required]],
-      region: ["", [Validators.required]]
+      region: ["", [Validators.required]],
+      checked: new FormArray([])
     });
+    this.registrationForm.get("checked").push(
+      this.fb.group({
+        status: [null]
+      })
+    );
   }
 
   // Choose city using select dropdown
@@ -79,5 +87,6 @@ export class AppComponent implements OnInit {
   }
   delete(i: any) {
     this.postsService.deletePost(+i);
+    this.registrationForm.reset();
   }
 }
