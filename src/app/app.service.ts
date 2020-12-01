@@ -27,7 +27,7 @@ export class AppService {
   }
 
   getPost(id: number) {
-    return { ...this.posts[0] };
+    return { ...this.posts[id] };
   }
   updatePost(id: number, data: IModel) {
     for (let i = 0; i < this.posts.length; i++) {
