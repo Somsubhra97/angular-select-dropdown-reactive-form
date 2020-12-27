@@ -6,11 +6,11 @@ import { Model, IModel } from "./Model";
 @Injectable({ providedIn: "root" })
 export class AppService {
   private posts: Model[] = [];
-  private postsUpdated = new Subject<Model[]>();
+  public postsUpdated = new Subject<Model[]>();
 
-  getPostUpdateListener() {
-    return this.postsUpdated.asObservable();
-  }
+  // getPostUpdateListener() {
+  //   return this.postsUpdated.asObservable();
+  // }
 
   getPosts() {
     this.postsUpdated.next(this.posts.slice());

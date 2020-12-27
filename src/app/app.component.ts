@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   registrationForm: any;
   ngOnInit() {
     this.postsSub = this.postsService
-      .getPostUpdateListener()
+      .postsUpdated
       .subscribe((res: Model[]) => {
         this.array = res;
       });
