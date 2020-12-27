@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
       new FormGroup({
         status: new FormControl(null)
       })
-    );console.log(this.registrationForm.get('checked'))
+    );
   }
 
   onDeleteRow(rowIndex) {
