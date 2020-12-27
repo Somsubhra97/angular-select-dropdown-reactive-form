@@ -15,14 +15,23 @@ export class AppService {
   getPosts() {
     this.postsUpdated.next(this.posts.slice());
   }
+  setLocalStorage(){
+    localStorage.setItem('data', JSON.stringify(this.posts))
+  }
+  getLocalStorage(){
+    this.posts=JSON.parse(localStorage.getItem('data'));
+    this.postsUpdated.next(this.posts.slice());
+  }
 
   addPosts(data: IModel) {
     this.posts.push(data);
+    this.setLocalStorage();
     this.postsUpdated.next(this.posts.slice());
   }
 
   deletePost(id: number) {
     this.posts.splice(id, 1);
+    this.setLocalStorage();
     this.postsUpdated.next(this.posts.slice());
   }
 
@@ -35,6 +44,7 @@ export class AppService {
         this.posts[i] = data;
       }
     }
+    this.setLocalStorage();
     this.postsUpdated.next(this.posts.slice());
   }
 }

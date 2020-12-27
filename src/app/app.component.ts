@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
       .subscribe((res: Model[]) => {
         this.array = res;
       });
+      this.postsService.getLocalStorage()
     this.init();
   }
 
