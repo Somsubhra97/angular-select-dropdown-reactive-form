@@ -20,7 +20,8 @@
              </select>
 
 							<!-- error block -->
-							<div class="invalid-feedback" *ngIf="isSubmitted && city.errors?.required">
+							<div class="invalid-feedback"
+								*ngIf="registrationForm.get('city').invalid && registrationForm.get('city').touched">
 								<sup>*</sup>Please enter your city name
 							</div>
 
@@ -30,7 +31,8 @@
              </select>
 
 							<!-- error block -->
-							<div class="invalid-feedback" *ngIf="isSubmitted && region.errors?.required">
+							<div class="invalid-feedback"
+								*ngIf="registrationForm.get('region').invalid && registrationForm.get('region').touched">
 								<sup>*</sup>Please enter your region name
 							</div>
 
@@ -41,7 +43,9 @@
               formControlName="name"
               class="form-control">
 
-								<p class="invalid-feedback" *ngIf="registrationForm.get('name').invalid">Please enter a
+								<p class="invalid-feedback"
+									*ngIf="registrationForm.get('name').invalid && registrationForm.get('name').touched">
+									Please enter a
 									name.
 								</p>
 							</div>
