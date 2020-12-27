@@ -27,11 +27,10 @@ export class AppComponent implements OnInit {
   }
   registrationForm: any;
   ngOnInit() {
-    this.postsSub = this.postsService
-      .postsUpdated
-      .subscribe((res: Model[]) => {
-        this.array = res;
-      });
+    this.postsSub = this.postsService.postsUpdated.subscribe((res: Model[]) => {
+      this.array = res;
+    });
+    this.postsService.getLocalStorage();
     this.init();
   }
 
