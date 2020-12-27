@@ -57,8 +57,8 @@ export class AppComponent implements OnInit {
   addRow() {
     let rows = this.registrationForm.get("checked") as FormArray;
     rows.push(
-      this.fb.group({
-        status: [null]
+      new FormGroup({
+        status: new FormControl(null, Validators.required)
       })
     );
   }
